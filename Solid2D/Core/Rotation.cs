@@ -125,7 +125,7 @@ namespace Core
         /// <summary>
         /// Provides friendly string value
         /// </summary>
-        /// <returns>Degrees rounded to two decimal points and decimals</returns>
+        /// <returns>Degrees value as string</returns>
         public override string ToString()
         {
             return _degrees.ToString();
@@ -177,7 +177,7 @@ namespace Core
         /// </summary>
         /// <param name="radians">Value in radians</param>
         /// <returns>New rotation</returns>
-        public static Rotation CreateFromRadians(float radians)
+        public static Rotation FromRadians(float radians)
         {
             return new Rotation(MathHelper.ToDegrees(radians));
         }
