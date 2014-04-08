@@ -56,6 +56,7 @@ namespace BoxStruct
             set
             {
                 _size = value.Half;
+                Transform();
             }
         }
 
@@ -70,7 +71,7 @@ namespace BoxStruct
             }
             set
             {
-                _origin = -value * _size.ToVector();
+                _origin = value;
                 Transform();
             }
         }
@@ -119,6 +120,7 @@ namespace BoxStruct
             set
             {
                 _position = value;
+                Transform();
             }
         }
 
@@ -134,6 +136,7 @@ namespace BoxStruct
             set
             {
                 _position.X = value;
+                Transform();
             }
         }
 
@@ -149,6 +152,7 @@ namespace BoxStruct
             set
             {
                 _position.Y = value;
+                Transform();
             }
         }
 
@@ -170,7 +174,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + ((_matrix.Right * _size.Width) + (_matrix.Up * _size.Height));
+                return _matrix.Translation + ((_matrix.Right * _size.Width) + (_matrix.Up * _size.Height));
             }
         }
 
@@ -181,7 +185,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + ((_matrix.Left * _size.Width) + (_matrix.Up * _size.Height));
+                return _matrix.Translation + ((_matrix.Left * _size.Width) + (_matrix.Up * _size.Height));
             }
         }
 
@@ -192,7 +196,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + ((_matrix.Right * _size.Width) + (_matrix.Down * _size.Height));
+                return _matrix.Translation + ((_matrix.Right * _size.Width) + (_matrix.Down * _size.Height));
             }
         }
 
@@ -203,7 +207,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + ((_matrix.Left * _size.Width) + (_matrix.Down * _size.Height));
+                return _matrix.Translation + ((_matrix.Left * _size.Width) + (_matrix.Down * _size.Height));
             }
         }
 
@@ -214,7 +218,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + (_matrix.Up * _size.Height);
+                return _matrix.Translation + (_matrix.Up * _size.Height);
             }
         }
 
@@ -225,7 +229,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + (_matrix.Right * _size.Width);
+                return _matrix.Translation + (_matrix.Right * _size.Width);
             }
         }
 
@@ -236,7 +240,7 @@ namespace BoxStruct
         {
             get
             {
-                return _position + (_matrix.Up * _size.Height);
+                return _matrix.Translation + (_matrix.Up * _size.Height);
             }
         }
 
@@ -247,14 +251,14 @@ namespace BoxStruct
         {
             get
             {
-                return _position + (_matrix.Right * _size.Width);
+                return _matrix.Translation + (_matrix.Right * _size.Width);
             }
         }
 
         protected void Transform()
         {
-            _matrix = Matrix2D.CreateTranslation(_origin) * Matrix2D.CreateScale(_scale)
-                      * Matrix2D.CreateRotation(_rotation.Radians);
+            _matrix = Matrix2D.CreateTranslation(-_origin * _size.ToVector()) * Matrix2D.CreateScale(_scale)
+                      * Matrix2D.CreateRotation(_rotation.Radians) * Matrix2D.CreateTranslation(_position);
         }
 
         /* /// <summary>
