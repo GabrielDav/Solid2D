@@ -67,6 +67,17 @@ namespace Core
         }
 
         /// <summary>
+        /// Gets the half size value
+        /// </summary>
+        public Size Half
+        {
+            get
+            {
+                return new Size(_width / 2f, _height / 2f);
+            }
+        }
+
+        /// <summary>
         /// Creates vector from current size
         /// </summary>
         /// <returns>Result vector</returns>
@@ -142,6 +153,28 @@ namespace Core
         }
 
         /// <summary>
+        /// Size operator +
+        /// </summary>
+        /// <param name="size">Left-hand value</param>
+        /// <param name="vector">Right-hand value</param>
+        /// <returns>Result size</returns>
+        public static Size operator +(Size size, Vector2 vector)
+        {
+            return new Size(size.Width + vector.X, size.Height + vector.Y);
+        }
+
+        /// <summary>
+        /// Size operator 
+        /// </summary>
+        /// <param name="vector">Left-hand value</param>
+        /// <param name="size">Right-hand value</param>
+        /// <returns>Result vector</returns>
+        public static Vector2 operator +(Vector2 vector, Size size)
+        {
+            return new Vector2(vector.X + size.Width, vector.Y + size.Height);
+        }
+
+        /// <summary>
         /// Size operator *
         /// </summary>
         /// <param name="size1">Left-hand value</param>
@@ -150,17 +183,6 @@ namespace Core
         public static Size operator *(Size size1, Size size2)
         {
             return new Size(size1.Width * size2.Width, size1.Height * size2.Height);
-        }
-
-        /// <summary>
-        /// Size operator /
-        /// </summary>
-        /// <param name="size1">Left-hand value</param>
-        /// <param name="size2">Right-hand value</param>
-        /// <returns>Result size</returns>
-        public static Size operator /(Size size1, Size size2)
-        {
-            return new Size(size1.Width / size2.Width, size1.Height / size2.Height);
         }
 
         /// <summary>
@@ -186,39 +208,6 @@ namespace Core
         }
 
         /// <summary>
-        /// Size operator /
-        /// </summary>
-        /// <param name="size">Left-hand value</param>
-        /// <param name="factor">Right-hand value</param>
-        /// <returns>Result size</returns>
-        public static Size operator /(Size size, float factor)
-        {
-            return new Size(size.Width / factor, size.Height / factor);
-        }
-
-        /// <summary>
-        /// Size operator +
-        /// </summary>
-        /// <param name="size">Left-hand value</param>
-        /// <param name="vector">Right-hand value</param>
-        /// <returns>Result size</returns>
-        public static Size operator +(Size size, Vector2 vector)
-        {
-            return new Size(size.Width + vector.X, size.Height + vector.Y);
-        }
-
-        /// <summary>
-        /// Size operator 
-        /// </summary>
-        /// <param name="vector">Left-hand value</param>
-        /// <param name="size">Right-hand value</param>
-        /// <returns>Result vector</returns>
-        public static Vector2 operator +(Vector2 vector, Size size)
-        {
-            return new Vector2(vector.X + size.Width, vector.Y + size.Height);
-        }
-
-        /// <summary>
         /// Size operator *
         /// </summary>
         /// <param name="size">Left-hand value</param>
@@ -238,6 +227,39 @@ namespace Core
         public static Vector2 operator *(Vector2 vector, Size size)
         {
             return new Vector2(vector.X * size.Width, vector.Y * size.Height);
+        }
+
+        /// <summary>
+        /// Size operator /
+        /// </summary>
+        /// <param name="size1">Left-hand value</param>
+        /// <param name="size2">Right-hand value</param>
+        /// <returns>Result size</returns>
+        public static Size operator /(Size size1, Size size2)
+        {
+            return new Size(size1.Width / size2.Width, size1.Height / size2.Height);
+        }
+
+        /// <summary>
+        /// Size operator /
+        /// </summary>
+        /// <param name="size">Left-hand value</param>
+        /// <param name="factor">Right-hand value</param>
+        /// <returns>Result size</returns>
+        public static Size operator /(Size size, float factor)
+        {
+            return new Size(size.Width / factor, size.Height / factor);
+        }
+
+        /// <summary>
+        /// Size operator /
+        /// </summary>
+        /// <param name="size">Left-hand value</param>
+        /// <param name="vector">Right-hand value</param>
+        /// <returns>Result size</returns>
+        public static Size operator /(Size size, Vector2 vector)
+        {
+            return new Size(size.Width / vector.X, size.Height / vector.Y);
         }
 
         /// <summary>

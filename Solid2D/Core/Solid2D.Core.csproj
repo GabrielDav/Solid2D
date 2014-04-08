@@ -7,10 +7,11 @@
     <ProjectGuid>{24043745-AF71-41C7-B998-DC568F215F02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Solid2D.Core</RootNamespace>
+    <AssemblyName>Solid2D.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,8 @@
       <HintPath>libraries\FarseerPhysics XNA.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,15 +49,26 @@
   <ItemGroup>
     <Compile Include="Box.cs" />
     <Compile Include="Circle.cs" />
+    <Compile Include="Graphics\Animator.cs" />
+    <Compile Include="Graphics\Batch2D.cs" />
+    <Compile Include="Graphics\BatchItem.cs" />
+    <Compile Include="Graphics\SpriteRenderer.cs" />
+    <Compile Include="IDrawable.cs" />
+    <Compile Include="IUpdateable.cs" />
     <Compile Include="MathExt.cs" />
     <Compile Include="Matrix2D.cs" />
     <Compile Include="Rotation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scene.cs" />
     <Compile Include="Size.cs" />
     <Compile Include="Triangle.cs" />
+    <Compile Include="Utility\CacheQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libraries\FarseerPhysics XNA.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Graphics\BatchEffect.xnb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

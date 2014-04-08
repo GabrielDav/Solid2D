@@ -10,6 +10,8 @@
 
 using System;
 
+using FarseerPhysics.Common;
+
 using Microsoft.Xna.Framework;
 
 namespace Core
@@ -117,9 +119,10 @@ namespace Core
         /// Adds radians to rotation
         /// </summary>
         /// <param name="radians">Value in radians</param>
-        public void AddRadians(float radians)
+        /// <returns>Result rotation</returns>
+        public Rotation AddRadians(float radians)
         {
-            Add(MathHelper.ToDegrees(radians));
+            return Add(MathHelper.ToDegrees(radians));
         }
 
         /// <summary>
@@ -204,6 +207,17 @@ namespace Core
         }
 
         /// <summary>
+        /// Rotation operator +
+        /// </summary>
+        /// <param name="rotation">Left-hand rotation value</param>
+        /// <param name="degrees">Right-hand float rotation value in degrees</param>
+        /// <returns>Result rotation</returns>
+        public static Rotation operator +(Rotation rotation, float degrees)
+        {
+            return rotation.Add(degrees);
+        }
+
+        /// <summary>
         /// Rotation operator -
         /// </summary>
         /// <param name="rotation1">Left-hand rotation value</param>
@@ -212,6 +226,17 @@ namespace Core
         public static Rotation operator -(Rotation rotation1, Rotation rotation2)
         {
             return rotation1.Add(-rotation2.Value);
+        }
+
+        /// <summary>
+        /// Rotation operator -
+        /// </summary>
+        /// <param name="rotation">Left-hand rotation value</param>
+        /// <param name="degrees">Right-hand float rotation value in degrees</param>
+        /// <returns>Result rotation</returns>
+        public static Rotation operator -(Rotation rotation, float degrees)
+        {
+            return rotation.Add(-degrees);
         }
 
         /// <summary>
@@ -234,6 +259,26 @@ namespace Core
         public static Rotation operator /(Rotation rotation1, float divider)
         {
             return new Rotation(rotation1.Value / divider);
+        }
+
+        /// <summary>
+        /// Explicit rotation from float in degrees
+        /// </summary>
+        /// <param name="degrees">Degrees value</param>
+        /// <returns>Result rotation</returns>
+        public static explicit operator Rotation(float degrees)
+        {
+            return new Rotation(degrees);
+        }
+
+        /// <summary>
+        /// Implicit float in degrees from rotation
+        /// </summary>
+        /// <param name="rotation">Rotation value</param>
+        /// <returns>Result degrees</returns>
+        public static implicit operator float(Rotation rotation)
+        {
+            return rotation.Value;
         }
 
         /// <summary>

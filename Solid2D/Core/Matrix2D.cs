@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Matrix2D.cs" company="GPL">
 // Gabriel Davidian
 // </copyright>
@@ -9,6 +9,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+
+using Microsoft.Xna.Framework;
 
 namespace Core
 {
@@ -35,7 +37,7 @@ namespace Core
         public readonly float M33;
 
         /// <summary>
-        /// Returns an instance of the identity matrix2D.
+        /// Gets an instance of the identity matrix2D.
         /// </summary>
         public static Matrix2D Identity
         {
@@ -122,7 +124,16 @@ namespace Core
         /// <summary>
         /// Initializes a new instance of Matrix2D.
         /// </summary>
-        public Matrix2D(float m11, float m12, float m13, float m21, float m22, float m23, float m31, float m32, float m33)
+        public Matrix2D(
+            float m11,
+            float m12,
+            float m13,
+            float m21,
+            float m22,
+            float m23,
+            float m31,
+            float m32,
+            float m33)
         {
             M11 = m11;
             M12 = m12;
@@ -135,13 +146,25 @@ namespace Core
             M33 = m33;
         }
 
+
         /// <summary>
         /// Retrieves a string representation of the current object.
         /// </summary>
         /// <returns>Matrix value as string</returns>
         public override string ToString()
         {
-            return "{ " + string.Format("{{M11:{0} M12:{1} M13{2}}} {{M21:{3} M22:{4} M23:{5}}} {{M31:{6} M32:{7} M33:{8}}}", M11, M12, M13, M21, M22, M23, M31, M32, M33) + " }";
+            return "{ "
+                   + string.Format(
+                       "{{M11:{0} M12:{1} M13{2}}} {{M21:{3} M22:{4} M23:{5}}} {{M31:{6} M32:{7} M33:{8}}}",
+                       M11,
+                       M12,
+                       M13,
+                       M21,
+                       M22,
+                       M23,
+                       M31,
+                       M32,
+                       M33) + " }";
         }
 
         /// <summary>
@@ -164,8 +187,8 @@ namespace Core
         public override int GetHashCode()
         {
             // ReSharper disable NonReadonlyFieldInGetHashCode
-            return M11.GetHashCode() + M12.GetHashCode() + M13.GetHashCode() + M21.GetHashCode() +
-                M22.GetHashCode() + M23.GetHashCode() + M31.GetHashCode() + M32.GetHashCode() + M33.GetHashCode();
+            return M11.GetHashCode() + M12.GetHashCode() + M13.GetHashCode() + M21.GetHashCode() + M22.GetHashCode()
+                   + M23.GetHashCode() + M31.GetHashCode() + M32.GetHashCode() + M33.GetHashCode();
             // ReSharper restore NonReadonlyFieldInGetHashCode
         }
 
@@ -176,7 +199,16 @@ namespace Core
         /// <returns>Result matrix</returns>
         public static Matrix2D operator -(Matrix2D source)
         {
-            return new Matrix2D(-source.M11, -source.M12, - source.M13, -source.M21, -source.M22, -source.M23, -source.M31, -source.M32, -source.M33);
+            return new Matrix2D(
+                -source.M11,
+                -source.M12,
+                - source.M13,
+                -source.M21,
+                -source.M22,
+                -source.M23,
+                -source.M31,
+                -source.M32,
+                -source.M33);
         }
 
         /// <summary>
@@ -188,9 +220,9 @@ namespace Core
         public static bool operator ==(Matrix2D matrix1, Matrix2D matrix2)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
-            if (matrix1.M11 == matrix2.M11 && matrix1.M12 == matrix2.M12 && matrix1.M13 == matrix2.M13 &&
-                matrix1.M21 == matrix2.M21 && matrix1.M22 == matrix2.M22 && matrix1.M23 == matrix2.M23 &&
-                matrix1.M31 == matrix2.M31 && matrix1.M32 == matrix2.M32) 
+            if (matrix1.M11 == matrix2.M11 && matrix1.M12 == matrix2.M12 && matrix1.M13 == matrix2.M13
+                && matrix1.M21 == matrix2.M21 && matrix1.M22 == matrix2.M22 && matrix1.M23 == matrix2.M23
+                && matrix1.M31 == matrix2.M31 && matrix1.M32 == matrix2.M32)
                 return matrix1.M33 == matrix2.M33;
             return false;
             // ReSharper restore CompareOfFloatsByEqualityOperator
@@ -205,8 +237,8 @@ namespace Core
         public static bool operator !=(Matrix2D matrix1, Matrix2D matrix2)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
-            if (matrix1.M11 == matrix2.M11 && matrix1.M12 == matrix2.M12 && matrix1.M13 == matrix2.M13 && matrix1.M21 == matrix2.M21 &&
-                matrix1.M22 == matrix2.M22 && matrix1.M23 == matrix2.M23
+            if (matrix1.M11 == matrix2.M11 && matrix1.M12 == matrix2.M12 && matrix1.M13 == matrix2.M13
+                && matrix1.M21 == matrix2.M21 && matrix1.M22 == matrix2.M22 && matrix1.M23 == matrix2.M23
                 && matrix1.M31 == matrix2.M31 && matrix1.M32 == matrix2.M32)
                 return matrix1.M33 != matrix2.M33;
             return true;
@@ -221,9 +253,16 @@ namespace Core
         /// <returns>Result matrix</returns>
         public static Matrix2D operator +(Matrix2D matrix1, Matrix2D matrix2)
         {
-            return new Matrix2D(matrix1.M11 + matrix2.M11, matrix1.M12 + matrix2.M12, matrix1.M13 + matrix2.M13,
-                matrix1.M21 + matrix2.M21, matrix1.M22 + matrix2.M22, matrix1.M23 + matrix2.M23,
-                matrix1.M31 + matrix2.M31, matrix1.M32 + matrix2.M32, matrix1.M33 + matrix2.M33);
+            return new Matrix2D(
+                matrix1.M11 + matrix2.M11,
+                matrix1.M12 + matrix2.M12,
+                matrix1.M13 + matrix2.M13,
+                matrix1.M21 + matrix2.M21,
+                matrix1.M22 + matrix2.M22,
+                matrix1.M23 + matrix2.M23,
+                matrix1.M31 + matrix2.M31,
+                matrix1.M32 + matrix2.M32,
+                matrix1.M33 + matrix2.M33);
         }
 
         /// <summary>
@@ -234,9 +273,16 @@ namespace Core
         /// <returns>Result matrix</returns>
         public static Matrix2D operator -(Matrix2D matrix1, Matrix2D matrix2)
         {
-            return new Matrix2D(matrix1.M11 - matrix2.M11, matrix1.M12 - matrix2.M12, matrix1.M13 - matrix2.M13,
-                matrix1.M21 - matrix2.M21, matrix1.M22 - matrix2.M22, matrix1.M23 - matrix2.M23,
-                matrix1.M31 - matrix2.M31, matrix1.M32 - matrix2.M32, matrix1.M33 - matrix2.M33);
+            return new Matrix2D(
+                matrix1.M11 - matrix2.M11,
+                matrix1.M12 - matrix2.M12,
+                matrix1.M13 - matrix2.M13,
+                matrix1.M21 - matrix2.M21,
+                matrix1.M22 - matrix2.M22,
+                matrix1.M23 - matrix2.M23,
+                matrix1.M31 - matrix2.M31,
+                matrix1.M32 - matrix2.M32,
+                matrix1.M33 - matrix2.M33);
         }
 
         /// <summary>
@@ -247,16 +293,35 @@ namespace Core
         /// <returns>Result matrix</returns>
         public static Matrix2D operator *(Matrix2D matrix1, Matrix2D matrix2)
         {
-            return new Matrix2D(
-                (float)(matrix1.M11 * (double)matrix2.M11 + matrix1.M12 * (double)matrix2.M21 + matrix1.M13 * (double)matrix2.M31),
-                (float)(matrix1.M11 * (double)matrix2.M12 + matrix1.M12 * (double)matrix2.M22 + matrix1.M13 * (double)matrix2.M32),
-                (float)(matrix1.M11 * (double)matrix2.M13 + matrix1.M12 * (double)matrix2.M23 + matrix1.M13 * (double)matrix2.M33),
-                (float)(matrix1.M21 * (double)matrix2.M11 + matrix1.M22 * (double)matrix2.M21 + matrix1.M23 * (double)matrix2.M31),
-                (float)(matrix1.M21 * (double)matrix2.M12 + matrix1.M22 * (double)matrix2.M22 + matrix1.M23 * (double)matrix2.M32),
-                (float)(matrix1.M21 * (double)matrix2.M13 + matrix1.M22 * (double)matrix2.M23 + matrix1.M23 * (double)matrix2.M33),
-                (float)(matrix1.M31 * (double)matrix2.M11 + matrix1.M32 * (double)matrix2.M21 + matrix1.M33 * (double)matrix2.M31),
-                (float)(matrix1.M31 * (double)matrix2.M12 + matrix1.M32 * (double)matrix2.M22 + matrix1.M33 * (double)matrix2.M32),
-                (float)(matrix1.M31 * (double)matrix2.M13 + matrix1.M32 * (double)matrix2.M23 + matrix1.M33 * (double)matrix2.M33));
+            return
+                new Matrix2D(
+                    (float)
+                    (matrix1.M11 * (double)matrix2.M11 + matrix1.M12 * (double)matrix2.M21
+                     + matrix1.M13 * (double)matrix2.M31),
+                    (float)
+                    (matrix1.M11 * (double)matrix2.M12 + matrix1.M12 * (double)matrix2.M22
+                     + matrix1.M13 * (double)matrix2.M32),
+                    (float)
+                    (matrix1.M11 * (double)matrix2.M13 + matrix1.M12 * (double)matrix2.M23
+                     + matrix1.M13 * (double)matrix2.M33),
+                    (float)
+                    (matrix1.M21 * (double)matrix2.M11 + matrix1.M22 * (double)matrix2.M21
+                     + matrix1.M23 * (double)matrix2.M31),
+                    (float)
+                    (matrix1.M21 * (double)matrix2.M12 + matrix1.M22 * (double)matrix2.M22
+                     + matrix1.M23 * (double)matrix2.M32),
+                    (float)
+                    (matrix1.M21 * (double)matrix2.M13 + matrix1.M22 * (double)matrix2.M23
+                     + matrix1.M23 * (double)matrix2.M33),
+                    (float)
+                    (matrix1.M31 * (double)matrix2.M11 + matrix1.M32 * (double)matrix2.M21
+                     + matrix1.M33 * (double)matrix2.M31),
+                    (float)
+                    (matrix1.M31 * (double)matrix2.M12 + matrix1.M32 * (double)matrix2.M22
+                     + matrix1.M33 * (double)matrix2.M32),
+                    (float)
+                    (matrix1.M31 * (double)matrix2.M13 + matrix1.M32 * (double)matrix2.M23
+                     + matrix1.M33 * (double)matrix2.M33));
         }
 
         /// <summary>
@@ -267,9 +332,16 @@ namespace Core
         /// <returns>Result matrix</returns>
         public static Matrix2D operator *(Matrix2D matrix, float scaleFactor)
         {
-            return new Matrix2D(matrix.M11 * scaleFactor, matrix.M12 * scaleFactor, matrix.M13 * scaleFactor,
-                matrix.M21 * scaleFactor, matrix.M22 * scaleFactor, matrix.M23 * scaleFactor,
-                matrix.M31 * scaleFactor, matrix.M32 * scaleFactor, matrix.M33 * scaleFactor);
+            return new Matrix2D(
+                matrix.M11 * scaleFactor,
+                matrix.M12 * scaleFactor,
+                matrix.M13 * scaleFactor,
+                matrix.M21 * scaleFactor,
+                matrix.M22 * scaleFactor,
+                matrix.M23 * scaleFactor,
+                matrix.M31 * scaleFactor,
+                matrix.M32 * scaleFactor,
+                matrix.M33 * scaleFactor);
         }
 
         /// <summary>
@@ -290,9 +362,16 @@ namespace Core
         /// <returns>Result matrix</returns>
         public static Matrix2D operator /(Matrix2D matrix1, Matrix2D matrix2)
         {
-            return new Matrix2D(matrix1.M11 / matrix2.M11, matrix1.M12 / matrix2.M12, matrix1.M13 / matrix2.M13,
-                matrix1.M21 / matrix2.M21, matrix1.M22 / matrix2.M22, matrix1.M23 / matrix2.M23,
-                matrix1.M31 / matrix2.M31, matrix1.M32 / matrix2.M32, matrix1.M33 / matrix2.M33);
+            return new Matrix2D(
+                matrix1.M11 / matrix2.M11,
+                matrix1.M12 / matrix2.M12,
+                matrix1.M13 / matrix2.M13,
+                matrix1.M21 / matrix2.M21,
+                matrix1.M22 / matrix2.M22,
+                matrix1.M23 / matrix2.M23,
+                matrix1.M31 / matrix2.M31,
+                matrix1.M32 / matrix2.M32,
+                matrix1.M33 / matrix2.M33);
         }
 
         /// <summary>
@@ -304,9 +383,16 @@ namespace Core
         public static Matrix2D operator /(Matrix2D matrix, float divider)
         {
             float num = 1f / divider;
-            return new Matrix2D(matrix.M11 * num, matrix.M12 * num, matrix.M13 * num,
-                matrix.M21 * num, matrix.M22 * num, matrix.M23 * num,
-                matrix.M31 * num, matrix.M32 * num, matrix.M33 * num);
+            return new Matrix2D(
+                matrix.M11 * num,
+                matrix.M12 * num,
+                matrix.M13 * num,
+                matrix.M21 * num,
+                matrix.M22 * num,
+                matrix.M23 * num,
+                matrix.M31 * num,
+                matrix.M32 * num,
+                matrix.M33 * num);
         }
 
         /// <summary>
@@ -372,6 +458,27 @@ namespace Core
             var num1 = (float)Math.Cos(radians);
             var num2 = (float)Math.Sin(radians);
             return new Matrix2D(num1, num2, 0f, -num2, num1, 0f, 0f, 0f, 1f);
+        }
+
+        public static Matrix2D CreateFromParameters(Vector2 translation, Vector2 scale, float roation)
+        {
+            return new Matrix2D(scale.X, 0, 0, 0, scale.Y, 0, translation.X, translation.Y, 1)
+                             * CreateRotation(roation);
+        }
+
+        public Matrix ToMatrix3D()
+        {
+            var result = Matrix.Identity;
+            result.M11 = M11;
+            result.M12 = M12;
+            result.M14 = M13;
+            result.M21 = M21;
+            result.M22 = M22;
+            result.M24 = M23;
+            result.M41 = M31;
+            result.M42 = M32;
+            result.M44 = M33;
+            return result;
         }
     }
 }
