@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Core.Graphics
+namespace Solid2D.Core.Graphics
 {
     public class BatchItem
     {
         public Texture2D Texture;
 
-        public VertexPositionColorTexture TL;
+        public VertexPositionColorTexture TopLeft;
 
-        public VertexPositionColorTexture TR;
+        public VertexPositionColorTexture TopRight;
 
-        public VertexPositionColorTexture BL;
+        public VertexPositionColorTexture BottomLeft;
 
-        public VertexPositionColorTexture BR;
+        public VertexPositionColorTexture BottomRight;
 
-        public Vector4 DestinationRectangle;
-
-        public Vector2 TextureTopLeft;
-
-        public Vector2 TextureBottomRight;
+        public float LayerDepth;
     }
 }
