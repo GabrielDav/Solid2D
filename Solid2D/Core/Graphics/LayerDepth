@@ -1,0 +1,114 @@
+namespace Solid2D.Core.Graphics
+{
+public struct LayerDepth
+    {
+        public static LayerDepth Min = new LayerDepth(0);
+
+        public static LayerDepth Max = new LayerDepth(1);
+
+        private float _value;
+
+        public LayerDepth(float depth)
+        {
+            if (depth < 0)
+                _value = 0;
+            else if (depth > 1)
+                _value = 1;
+            else
+                _value = depth;
+        }
+
+        public float Value
+        {
+            get
+            {
+                return _value;
+            }
+        }
+
+        public float InvertedValue
+        {
+            get
+            {
+                return 1 - _value;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is LayerDepth)
+            {
+                return ((LayerDepth)obj).Value == _value;
+            }
+            if (obj is float)
+            {
+                return ((float)obj) == _value;
+            }
+            if (obj is double)
+            {
+                return ((double)obj) == _value;
+            }
+            return false;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{{Value:{0}}}", _value);
+        }
+
+        public static implicit operator LayerDepth(float depth)
+        {
+            return new LayerDepth(depth);
+        }
+
+        public static LayerDepth operator +(LayerDepth depth1, float depth2)
+        {
+            return new LayerDepth(depth1.Value + depth2);
+        }
+
+        public static LayerDepth operator +(float depth1, LayerDepth depth2)
+        {
+            return new LayerDepth(depth1 + depth2.Value);
+        }
+
+        public static LayerDepth operator -(LayerDepth depth1, float depth2)
+        {
+            return new LayerDepth(depth1.Value - depth2);
+        }
+
+        public static LayerDepth operator -(float depth1, LayerDepth depth2)
+        {
+            return new LayerDepth(depth1 - depth2.Value);
+        }
+
+        public static bool operator ==(LayerDepth layerDepth1, LayerDepth layerDepth2)
+        {
+            return layerDepth1.Equals(layerDepth2);
+        }
+
+        public static bool operator ==(float layerDepth1, LayerDepth layerDepth2)
+        {
+            return layerDepth2.Equals(layerDepth1);
+        }
+
+        public static bool operator ==(LayerDepth layerDepth1, float layerDepth2)
+        {
+            return layerDepth1.Equals(layerDepth2);
+        }
+
+        public static bool operator !=(LayerDepth layerDepth1, LayerDepth layerDepth2)
+        {
+            return !layerDepth1.Equals(layerDepth2);
+        }
+
+        public static bool operator !=(float layerDepth1, LayerDepth layerDepth2)
+        {
+            return !layerDepth2.Equals(layerDepth1);
+        }
+
+        public static bool operator !=(LayerDepth layerDepth1, float layerDepth2)
+        {
+            return !layerDepth1.Equals(layerDepth2);
+        }
+    }
+}
