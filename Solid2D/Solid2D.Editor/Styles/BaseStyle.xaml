@@ -1,0 +1,168 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Background-->
+    <SolidColorBrush x:Key="Background" Color="#1C1C1C"/>
+    <SolidColorBrush x:Key="LightBackground" Color="#2D2D30"/>
+    <SolidColorBrush x:Key="BlueBackground" Color="#007ACC" />
+    <SolidColorBrush x:Key="BlueBackgroundActive" Color="#52B0EF" />
+    <SolidColorBrush x:Key="BlueControlActive" Color="#90C5E9" />
+    <SolidColorBrush x:Key="SelectedItemBackground" Color="#333334"/>
+
+    <!--Other colors-->
+    <SolidColorBrush x:Key="Border" Color="#3F3F46" />
+
+
+    <!--TextBlock-->
+
+
+    <!--Button-->
+    <Style x:Key="BaseButtonTemplate" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource BaseButtonTemplate}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource BlueBackgroundActive}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--======================ContextMenu=======================-->
+    <Style TargetType="ContextMenu">
+        <Setter Property="Width" Value="200"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border BorderThickness="1" BorderBrush="{StaticResource Border}">
+                        <StackPanel Background="{StaticResource Background}" IsItemsHost="True"
+                            KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <StackPanel Orientation="Horizontal" Background="Transparent" x:Name="ItemStackPanel">
+                        <Image Source="{TemplateBinding Icon}" Width="20" Height="20" Margin="6, 4, 6, 2"/>
+                        <TextBlock Text="{TemplateBinding Header}" Margin="4,4,4,2" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ItemStackPanel" Property="Background" Value="{StaticResource SelectedItemBackground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--======================Slider============================-->
+
+    <Style x:Key="SliderButtonSymbol" TargetType="Path">
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Stroke" Value="White" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
+                <Setter Property="Stroke" Value="{StaticResource BlueControlActive}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Button" x:Key="SliderButton" BasedOn="{StaticResource BaseButtonTemplate}">
+        <Setter Property="Width" Value="8" />
+        <Setter Property="Height" Value="8" />
+        <Setter Property="Background" Value="Transparent"></Setter>
+    </Style>
+    <Style x:Key="SliderThumbRectangle" TargetType="Rectangle">
+        <Setter Property="Fill" Value="White"></Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Track, AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
+                <Setter Property="Fill" Value="{StaticResource BlueControlActive}"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle Width="4" Height="11">
+                        <Rectangle.Style>
+                            <Style TargetType="Rectangle">
+                                <Setter Property="Fill" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Track, AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
+                                        <Setter Property="Fill" Value="{StaticResource BlueControlActive}"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Rectangle.Style>
+                    </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Rectangle Fill="White" Height="1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MyCustomStyleForSlider" TargetType="{x:Type Slider}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="12"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{x:Static Slider.DecreaseSmall}" Margin="0,0,4,0" Grid.Column="0" Style="{StaticResource SliderButton}">
+                            <Path Data="M 0 0 L 8 0" Style="{StaticResource SliderButtonSymbol}" />
+                        </Button>
+                        <Track x:Name="PART_Track" Grid.Column="1">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb x:Name="Thumb" Background="Black" Height="10" Style="{StaticResource SliderThumbStyle}"/>
+                            </Track.Thumb>
+                        </Track>
+                        <Button Command="{x:Static Slider.IncreaseSmall}" Margin="4,0,0,0" Grid.Column="2" Style="{StaticResource SliderButton}">
+                            <Path Data="M 0 4 L 8 4 M 4 0 L 4 8" Style="{StaticResource SliderButtonSymbol}" />
+                        </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+</ResourceDictionary>

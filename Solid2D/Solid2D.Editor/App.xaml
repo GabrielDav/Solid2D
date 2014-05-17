@@ -1,0 +1,16 @@
+﻿<Application x:Class="Solid2D.Editor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:properties="clr-namespace:Solid2D.Editor.Properties"
+             xmlns:converters="clr-namespace:Solid2D.Editor.Converters"
+             StartupUri="MainWindow.xaml" Exit="App_OnExit" Startup="App_OnStartup">
+    <Application.Resources>
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary Source="Styles/WindowStyle.xaml"></ResourceDictionary>
+             </ResourceDictionary.MergedDictionaries>
+            <properties:Settings x:Key="Settings" />
+             <converters:GridLengthValueConverter x:Key="GridLengthValueConverter"></converters:GridLengthValueConverter>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
